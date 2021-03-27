@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <style>
+        body{
+        padding-top: 60px;
+        padding-bottom: 40px;
+        font: calibri;
+        }
+        .fixed-header, .fixed-footer{
+        width: 100%;
+        position: fixed;
+        background: #333;
+        padding: 10px 0;
+        color: #fff;
+        }
+        .fixed-header{
+            top: 0;
+        }
+        .fixed-footer{
+            bottom: 0;
+        }
+        .container{
+            width: 80%;
+            margin: 0 auto; /* Center the DIV horizontally */
+        }
+        nav a{
+            color: #fff;
+            text-decoration: none;
+            padding: 7px 25px;
+            display: inline-block;
+        }
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <title>Deploy Web App</title>
+    <link rel="shortcut icon" type="image/ico" href="{% static 'OpenText Logo/favicon.ico' %}">
+
+</head>
+<body>
+
+    <div class="fixed-header">
+        <div class>
+            <nav>
+                <a href="/"><span style="font-size: 40px;">RFx DashBoard</span></a>
+
+            </nav>
+        </div>
+    </div>
+
+    <div>
+                <div>
+                    <div><canvas id="myChart"></canvas></div>
+                </div>
+
+    </div>
+
+</body>
+
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: {{buVals|safe}},
+        datasets: [{
+            label: 'FY21 RFx Received',
+            backgroundColor: 'rgb(97, 171, 64)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: {{amtVals|safe}}
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+
+</script>
+</html>
